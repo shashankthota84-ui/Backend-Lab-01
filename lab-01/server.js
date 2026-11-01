@@ -1,0 +1,66 @@
+// Step 3 & 4: Express Server with Routes, 404 Handling, and Status Code Logging
+
+// 1. Import Express framework using CommonJS syntax
+const express = require('express');
+
+// 2. Initialize the Express application
+const app = express();
+
+// 3. Define the port number
+const PORT = 3000;
+
+// 4. Request Logging Middleware
+// Simple custom middleware to log incoming requests and response status codes in the terminal
+// Example output: GET / - 200, GET /unknown - 404
+app.use((req, res, next) => {
+  // 'finish' event is triggered once the response has been sent to the client
+  res.on('finish', () => {
+    console.log(`${req.method} ${req.url} - ${res.statusCode}`);
+  });
+  // Call next() to pass control to the matching route handler
+  next();
+});
+
+// ==========================================
+// ROUTES
+// ==========================================
+
+// Route 1: GET / (Home route)
+// Responds with a welcome message and HTTP status code 200
+app.get('/', (req, res) => {
+  res.status(200).send('Welcome to Lab 1 Node.js and Express Server');
+});
+
+// Route 2: GET /about
+// Responds with student name and section as JSON with HTTP status code 200
+app.get('/about', (req, res) => {
+  res.status(200).json({
+    name: "YOUR_NAME",
+    section: "YOUR_SECTION"
+  });
+});
+
+// Route 3: GET /time
+// Responds with current date and time using new Date() as JSON with HTTP status code 200
+app.get('/time', (req, res) => {
+  res.status(200).json({
+    currentTime: new Date().toISOString()
+  });
+});
+
+// Route 4: Unknown Routes (404 Not Found Handler)
+// Catches any undefined route (e.g., /hello, /test, /abc, /random)
+app.use((req, res) => {
+  res.status(404).json({
+    error: "Route not found"
+  });
+});
+
+// ==========================================
+// START SERVER
+// ==========================================
+
+// Start listening for incoming requests on port 3000
+app.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`);
+});
