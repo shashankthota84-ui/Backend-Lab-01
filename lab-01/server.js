@@ -37,15 +37,20 @@ app.get('/', (req, res) => {
 app.get('/about', (req, res) => {
   res.status(200).json({
     name: "THOTA SHASHANK",
-    section: "CSE-2E (211)"
+    section: "CSE-2E (211)",
+    Registration_Number: "252U1R1243"
   });
 });
 
 // Route 3: GET /time
-// Responds with current date and time using new Date() as JSON with HTTP status code 200
+// Responds with current date and 24-hour time using new Date() as JSON with HTTP status code 200
 app.get('/time', (req, res) => {
+  const now = new Date();
   res.status(200).json({
-    currentTime: new Date().toISOString()
+    currentTime: now.toLocaleTimeString([], { hour12: false }), // 24-hour format: "18:13:45"
+    currentDate: now.toLocaleDateString(),                      // e.g., "1/11/2026"
+    fullDateTime: now.toLocaleString([], { hour12: false }),    // e.g., "1/11/2026, 18:13:45"
+    iso: now.toISOString()                                     // e.g., "2026-11-01T12:43:45.000Z"
   });
 });
 
