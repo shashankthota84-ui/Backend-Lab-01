@@ -37,7 +37,7 @@ app.get('/', (req, res) => {
 app.get('/about', (req, res) => {
   res.status(200).json({
     name: "THOTA SHASHANK",
-    section: "CSE-2E (211) "
+    section: "CSE-2E (211)"
   });
 });
 
