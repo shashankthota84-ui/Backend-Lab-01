@@ -1,4 +1,4 @@
-// Step 3 & 4: Express Server with Routes, 404 Handling, and Status Code Logging
+// Express Server for Lab 1 (Supports Local & Render Deployment)
 
 // 1. Import Express framework using CommonJS syntax
 const express = require('express');
@@ -6,8 +6,9 @@ const express = require('express');
 // 2. Initialize the Express application
 const app = express();
 
-// 3. Define the port number
-const PORT = 3000;
+// 3. Define the port number dynamically
+// Uses environment variable PORT provided by hosting platforms like Render, or defaults to 3000 locally
+const PORT = process.env.PORT || 3000;
 
 // 4. Request Logging Middleware
 // Simple custom middleware to log incoming requests and response status codes in the terminal
@@ -60,7 +61,7 @@ app.use((req, res) => {
 // START SERVER
 // ==========================================
 
-// Start listening for incoming requests on port 3000
+// Start listening for incoming requests on the specified PORT
 app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
