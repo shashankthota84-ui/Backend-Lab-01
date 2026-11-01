@@ -36,8 +36,8 @@ app.get('/', (req, res) => {
 // Responds with student name and section as JSON with HTTP status code 200
 app.get('/about', (req, res) => {
   res.status(200).json({
-    name: "YOUR_NAME",
-    section: "YOUR_SECTION"
+    name: "THOTA SHASHANK",
+    section: "CSE-2E (211) "
   });
 });
 
